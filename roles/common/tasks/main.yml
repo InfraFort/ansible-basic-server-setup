@@ -1,0 +1,39 @@
+- name: Update apt cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install base packages
+  apt:
+    name:
+      - nginx
+      - ufw
+      - fail2ban
+      - htop
+    state: present
+
+- name: Start and enable NGINX
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+
+- name: Copy index.html
+  copy:
+    src: index.html
+    dest: /var/www/html/index.nginx-debian.html
+    owner: www-data
+    group: www-data
+    mode: '0644'
+
+- name: Enable UFW
+  ufw:
+    state: enabled
+
+- name: Allow 'OpenSSH' and 'Nginx Full'
+  ufw:
+    rule: allow
+    name: "{{ item }}"
+  loop:
+    - OpenSSH
+    - 'Nginx Full'
