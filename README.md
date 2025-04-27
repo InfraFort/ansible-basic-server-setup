@@ -9,6 +9,8 @@ This playbook configures a basic Ubuntu 22.04 server with:
 - Basic system tools (htop, etc.)
 - Simple welcome page
 
+Video on how to set this up can be found here : https://youtu.be/NrObnKyjHGo
+
 ## ✅ Prerequisites
 
 - Control node (your local machine or VM) with Ansible installed
